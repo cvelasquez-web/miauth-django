@@ -6,9 +6,6 @@ from pathlib import Path
 import os
 import dj_database_url
 
-import os
-
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -90,12 +87,16 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # ==========================================
-# CONFIGURACIÓN DE CORREO CON BREVO (ANYMAIL)
+# CONFIGURACIÓN DE CORREO CON BREVO (ANYMAIL - Django 6.1+)
 # ==========================================
-EMAIL_BACKEND = "anymail.backends.brevo.EmailBackend"
-
-ANYMAIL = {
-    "BREVO_API_KEY": os.environ.get("BREVO_API_KEY", ""),  # <-- Lee desde el entorno
+# Usamos MAILERS en lugar de EMAIL_BACKEND para evitar el bloqueo de SMTP de Render
+MAILERS = {
+    "default": {
+        "BACKEND": "anymail.backends.brevo.EmailBackend",
+        "OPTIONS": {
+            "api_key": os.environ.get("BREVO_API_KEY", ""),
+        },
+    },
 }
 
 DEFAULT_FROM_EMAIL = "carlosvelasquez575@gmail.com"
