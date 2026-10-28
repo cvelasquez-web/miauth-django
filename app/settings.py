@@ -87,16 +87,12 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # ==========================================
-# CONFIGURACIÓN DE CORREO CON BREVO (ANYMAIL - Django 6.1+)
+# CONFIGURACIÓN DE CORREO CON BREVO (ANYMAIL)
 # ==========================================
-# Usamos MAILERS en lugar de EMAIL_BACKEND para evitar el bloqueo de SMTP de Render
-MAILERS = {
-    "default": {
-        "BACKEND": "anymail.backends.brevo.EmailBackend",
-        "OPTIONS": {
-            "api_key": os.environ.get("BREVO_API_KEY", ""),
-        },
-    },
+EMAIL_BACKEND = "anymail.backends.brevo.EmailBackend"
+
+ANYMAIL = {
+    "BREVO_API_KEY": os.environ.get("BREVO_API_KEY", ""),  # <-- Lee desde el entorno
 }
 
 DEFAULT_FROM_EMAIL = "carlosvelasquez575@gmail.com"
