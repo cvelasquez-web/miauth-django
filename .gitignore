@@ -1,0 +1,15 @@
+# Entorno virtual
+env/
+
+# Base de datos local
+db.sqlite3
+
+# Archivos de Python
+__pycache__/
+*.py[cod]
+
+# Archivos estáticos generados
+staticfiles/
+
+# Configuración del editor
+.vscode/

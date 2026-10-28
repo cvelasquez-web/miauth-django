@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container" style="max-width: 600px;">
+    <h1>Eliminar cliente</h1>
+    <div class="alert alert-danger mt-3">
+        ¿Estás seguro de que deseas eliminar permanentemente al cliente <strong>{{ cliente.nombre }}</strong> ({{ cliente.correo }})?
+    </div>
+    
+    <form method="post">
+        {% csrf_token %}
+        <button class="btn btn-danger" type="submit">Sí, eliminar definitivamente</button>
+        <a href="{% url 'clientes_crear' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

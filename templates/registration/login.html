@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container" style="max-width: 400px; margin-top: 50px;">
+    <h1 class="mb-4">Entrar</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        
+        <!-- Iteramos sobre los campos del formulario de Django -->
+        {% for field in form %}
+        <div class="mb-3">
+            <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+            <!-- Aquí forzamos la clase de Bootstrap para que se vea bien -->
+            <input type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}" id="{{ field.id_for_label }}" class="form-control" {% if field.value %}value="{{ field.value }}"{% endif %}>
+            
+            {% for error in field.errors %}
+            <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+
+        <button class="btn btn-primary w-100" type="submit">Entrar</button>
+    </form>
+
+    <div class="mt-3 text-center">
+        <a href="{% url 'password_reset' %}">Olvidé mi contraseña</a>
+    </div>
+</div>
+{% endblock %}s

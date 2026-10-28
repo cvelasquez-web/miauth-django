@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: miauth-django
+    runtime: python
+    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate && python manage.py crear_admin"
+    startCommand: "python manage.py migrate && gunicorn app.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.14.7
+      - key: DEBUG
+        value: False
+      - key: SECRET_KEY
+        value: django-insecure-_3y)6z3jgc17(qv$$6vkls1(2ix!!s7a5ynj@=41mt%o!v9src
+      - key: DATABASE_URL
+        fromDatabase:
+          name: miauth-db
+          property: connectionString
+      - key: DJANGO_SUPERUSER_USERNAME
+        value: Cvelasquez
+      - key: DJANGO_SUPERUSER_PASSWORD
+        value: TuContrasenaSegura123  # <-- Cambia esto por tu contraseña real
+      - key: DJANGO_SUPERUSER_EMAIL
+        value: carlosvelasquez575@gmail.com
