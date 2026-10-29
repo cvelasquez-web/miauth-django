@@ -103,12 +103,3 @@ LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/login/'
 CSRF_TRUSTED_ORIGINS = ['https://miauth-django.onrender.com']
-
-# ==========================================
-# CONFIGURACIÓN DE SEGURIDAD DE SESIONES
-# ==========================================
-# Cerrar la sesión al cerrar el navegador (evita que otra persona use la misma PC)
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-
-# Cerrar la sesión automáticamente tras 30 minutos de inactividad (1800 segundos)
-SESSION_COOKIE_AGE = 1800
