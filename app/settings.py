@@ -92,7 +92,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 EMAIL_BACKEND = "anymail.backends.brevo.EmailBackend"
 
 ANYMAIL = {
-    "BREVO_API_KEY": os.environ.get("BREVO_API_KEY", ""),  # <-- Lee desde el entorno
+    "BREVO_API_KEY": os.environ.get("BREVO_API_KEY", ""),
 }
 
 DEFAULT_FROM_EMAIL = "carlosvelasquez575@gmail.com"
@@ -103,3 +103,16 @@ LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/login/'
 CSRF_TRUSTED_ORIGINS = ['https://miauth-django.onrender.com']
+
+# ==========================================
+# CONFIGURACIÓN DE SEGURIDAD DE SESIONES (ESTO FALTABA)
+# ==========================================
+# Cierra la sesión al cerrar el navegador
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+# Renueva el contador de inactividad en cada petición
+SESSION_SAVE_EVERY_REQUEST = True
+
+# Cierra la sesión tras 30 minutos (1800 segundos) de inactividad
+SESSION_COOKIE_AGE = 1800
+# ==========================================
