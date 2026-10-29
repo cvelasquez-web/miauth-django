@@ -23,12 +23,12 @@
                        <span class="navbar-text">{{ user.username }}</span> 
                    </li> 
 
-                   <!-- Enlace a Clientes CORREGIDO -->
+                   <!-- Enlace a Clientes -->
                    <li class="nav-item me-3">
                        <a class="nav-link" href="{% url 'clientes_crear' %}">Clientes</a>
                    </li>
 
-                   <!-- Botón de Salir CORREGIDO (con ?next=) -->
+                   <!-- Botón de Salir -->
                    <li class="nav-item"> 
                        <form method="post" action="{% url 'logout' %}?next={% url 'login' %}" class="m-0"> 
                            {% csrf_token %} 
@@ -49,6 +49,20 @@
    <main class="py-4"> 
        {% block content %}{% endblock %} 
    </main> 
+
+   <!-- SCRIPT DE SEGURIDAD: Cierra la sesión si se cierra la pestaña o se abandona la página -->
+   {% if user.is_authenticated %}
+   <script>
+       document.addEventListener('visibilitychange', function() {
+           if (document.visibilityState === 'hidden') {
+               navigator.sendBeacon('/logout-forzado/');
+           }
+       });
+       window.addEventListener('pagehide', function() {
+           navigator.sendBeacon('/logout-forzado/');
+       });
+   </script>
+   {% endif %}
 
 </body> 
 
